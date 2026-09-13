@@ -23,7 +23,7 @@
 - **Compile-Time Reflection Auditor:** `%macro` reflection auditors executing stoichiometric flux balance checking ($S \cdot v = 0$) and metabolic pathway conservation proofs at compile time.
 
 ### 3. `Library/Wiki/Main.idr`
-- **Verification Runner:** Literate Idris 2 test runner executing compile-time `%macro` reflection proofs and QuickCheck property test suites for Systems Biology (`lsystems-biology-wiki`).
+- **Verification Runner:** Literate Idris 2 test runner executing compile-time `%macro` reflection proofs and QuickCheck property test suites for Systems Biology (`systems-biology-wiki`).
 
 ---
 
@@ -33,7 +33,7 @@ To compile the literate verification suite and execute the test runner binary:
 
 ```bash
 idris2 --build Idris2-SystemsBiology-Wiki.ipkg
-./build/exec/lsystems-biology-wiki
+./build/exec/systems-biology-wiki
 ```
 
 ---

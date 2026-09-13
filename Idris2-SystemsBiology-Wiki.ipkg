@@ -28,4 +28,4 @@ modules = Wiki.Observations.MetabolicPathway
         , Wiki.Reflect.SystemsBiologyMacroSolver
 
 main = Wiki.Main
-executable = lsystems-biology-wiki
+executable = systems-biology-wiki
