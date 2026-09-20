@@ -3,29 +3,23 @@ version = 0.1.0
 authors = "Justin Kelly"
 brief   = "Discrete Systems Biology, Metabolic Networks & Physiological Systems Architecture Specification Wiki"
 
-depends = base
-        , contrib
-        , Idris2-Multiset-Core
-        , Idris2-Multiset-Transform
-        , Idris2-Geometry
-        , Idris2-Physics
-        , Idris2-Chemistry
-        , Idris2-Biology
-        , idris2-Dihedron
-        , idris2-QuickCheck
-
+depends = Idris2-Biology, Idris2-Electromagnetism, Idris2-Multiset-Core, Idris2-Multiset-Transform, Idris2-QuantumComputing, base, idris2-Dihedron, idris2-QuickCheck, linear
 sourcedir = "Library"
 
-modules = Wiki.Observations.MetabolicPathway
-        , Wiki.Observations.GeneRegulatoryNetwork
-        , Wiki.Observations.NeuralActionPotential
-        , Wiki.Observations.SignalTransductionCascade
-        , Wiki.PhotosyntheticCoherence
-        , Wiki.StoichiometricMultiset
-        , Wiki.LinearATPEnzyme
-        , Wiki.ScaleTransforms
-        , Wiki.Reflect.SystemsBiologyAuditor
-        , Wiki.Reflect.SystemsBiologyMacroSolver
+modules = Wiki.AtpHydrolysisObs,
+          Wiki.LinearATPEnzyme,
+          Wiki.Main,
+          Wiki.MetabolicObs,
+          Wiki.Observations.GeneRegulatoryNetwork,
+          Wiki.Observations.MetabolicPathway,
+          Wiki.Observations.NeuralActionPotential,
+          Wiki.Observations.SignalTransductionCascade,
+          Wiki.PhotosyntheticCoherence,
+          Wiki.ProteinFolding,
+          Wiki.Reflect.SystemsBiologyAuditor,
+          Wiki.Reflect.SystemsBiologyMacroSolver,
+          Wiki.ScaleTransforms,
+          Wiki.StoichiometricMultiset
 
 main = Wiki.Main
 executable = systems-biology-wiki
