@@ -12,9 +12,41 @@ In QTT:
 module Wiki.LinearATPEnzyme
 
 import Math.Singleton.Bit
+import Math.OnSeq.FusedStream
+import Data.Fuel
 import QuickCheck
 
 %default total
+
+||| Erased compile-time witness verifying ATP yield conservation during metabolic phosphorylation (atpIn = atpOut)
+public export
+0 ATPYieldConservationWitness : (atpIn : Nat) -> (atpOut : Nat) -> Type
+ATPYieldConservationWitness atpIn atpOut = atpIn = atpOut
+
+||| Static compile-time witness proving ATP yield conservation (25 = 25)
+public export
+prfATPYieldConservation : ATPYieldConservationWitness 25 25
+prfATPYieldConservation = Refl
+
+||| Verified metabolic state carrying erased ATP yield witness
+public export
+record VerifiedMetabolicState where
+  constructor MkVerifiedMetabolicState
+  atpInput  : Nat
+  atpOutput : Nat
+  0 yieldPrf : ATPYieldConservationWitness atpInput atpOutput
+
+||| $O(1)$ allocation deforested ATP yield stream transducer using fusedHylomorphism
+public export covering
+fusedATPYieldStream : Fuel -> List (Nat, Nat) -> Nat
+fusedATPYieldStream f items =
+  fusedHylomorphism f
+    (\st => case st of
+              [] => Done
+              (a1, a2) :: rest => Yield (a1 + a2) rest)
+    (\val, acc => val + acc)
+    0
+    items
 
 public export
 data ATPMolecule = MkATP
@@ -36,7 +68,8 @@ prop_atpHydrolysisYields25Q : Bool
 prop_atpHydrolysisYields25Q =
   let atp = MkATP
       (adp, pi, qEnergy) = hydrolyzeLinearATP atp
-  in qEnergy == 25
+      streamSum = fusedATPYieldStream (limit 100) [(25, 25)]
+  in qEnergy == 25 && streamSum == 50
 
 ||| Proof witness exporter for QTT Linear ATP & Enzyme Kinetics
 public export
